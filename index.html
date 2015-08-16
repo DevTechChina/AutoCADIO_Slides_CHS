@@ -458,23 +458,7 @@ Content-Length: 1711
 						<li>LoadOnCommandInvocation="True":  执行自定义命令时按需加载</li>
 						</ul>
 					
-<code><pre>
-<?xml version="1.0" encoding="utf-8" ?>
-<ApplicationPackage
-    SchemaVersion="1.0"
-    Version="1.0"
-    ProductCode=""
-    HelpFile=""
-    Name="MyTestPackage"
-    Description="AutoCAD.IO Test Package"
-    Author="Albert Szilvasy" >
-
-    <CompanyDetails
-        Name="Autodesk, Inc"
-        Phone="415.555.5555"
-        Url="www.autodesk.com"
-        Author="Xiaodong Liang" />
-
+<code><pre> 
     <Components>
         <RuntimeRequirements 
             OS="Win64" 
@@ -489,12 +473,11 @@ Content-Length: 1711
             >
             <Commands GroupName="MyTestCommands">
                 <Command Global="MyDrawText" Local="MyDrawText" />
-            </Commands> 
-        </ComponentEntry> 
+            </ Commands> 
+        </ ComponentEntry> 
 
-    </Components>
-</ApplicationPackage>
-</pre></code>
+    </ Components>
+ </pre></code>
 
 					</section> 
 					
