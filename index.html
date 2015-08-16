@@ -456,29 +456,7 @@ Content-Length: 1711
 						<li>1. 准备AutoCAD开发程序的bundle的zip包</li>	
 						<li>PackageContents.xml</li>
 						<li>LoadOnCommandInvocation="True":  执行自定义命令时按需加载</li>
-						</ul>
-					
-<code><pre> 
-    <Components>
-        <RuntimeRequirements 
-            OS="Win64" 
-            Platform="AutoCAD" />
-        
-        <ComponentEntry
-            AppName="MyTestPackage"
-            ModuleName="./Contents/CrxApp.dll"
-            AppDescription="AutoCAD.IO .net test app"
-            LoadOnCommandInvocation="True"
-            LoadOnAutoCADStartup="False"
-            >
-            <Commands GroupName="MyTestCommands">
-                <Command Global="MyDrawText" Local="MyDrawText" />
-            </ Commands> 
-        </ ComponentEntry> 
-
-    </ Components>
- </pre></code>
-
+						</ul> 
 					</section> 
 					
 					<section id="AppPackage">
