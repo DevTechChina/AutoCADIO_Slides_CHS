@@ -457,12 +457,56 @@ Content-Length: 1711
 						<li>PackageContents.xml</li>
 						<li>LoadOnCommandInvocation="True":  执行自定义命令时按需加载</li>
 						</ul>
+						<?xml version="1.0" encoding="utf-8" ?>
+<code><pre>
+<ApplicationPackage
+    SchemaVersion="1.0"
+    Version="1.0"
+    ProductCode=""
+    HelpFile=""
+    Name="MyTestPackage"
+    Description="AutoCAD.IO Test Package"
+    Author="Albert Szilvasy" >
+
+    <CompanyDetails
+        Name="Autodesk, Inc"
+        Phone="415.555.5555"
+        Url="www.autodesk.com"
+        Author="Xiaodong Liang" />
+
+    <Components>
+        <RuntimeRequirements 
+            OS="Win64" 
+            Platform="AutoCAD" />
+        
+        <ComponentEntry
+            AppName="MyTestPackage"
+            ModuleName="./Contents/CrxApp.dll"
+            AppDescription="AutoCAD.IO .net test app"
+            LoadOnCommandInvocation="True"
+            LoadOnAutoCADStartup="False"
+            >
+            <Commands GroupName="MyTestCommands">
+                <Command Global="MyDrawText" Local="MyDrawText" />
+            </Commands> 
+        </ComponentEntry> 
+
+    </Components>
+</ApplicationPackage>
+</pre></code>
+
 					</section> 
 					
 					<section id="AppPackage">
 						<ul>
 						<li>2. 得到上载package的存储url： IO在亚马逊服务器上的空间</li>	
 						</ul>
+						<code><pre>
+POST /autocad.io/v1/AppPackages/GenerateUploadUrl HTTP/1.1
+Authorization: Bearer my_token
+Host: autocad.io
+Content-Length: 0
+						</pre></code>
 					</section> 
 					
 					<section id="AppPackage">						 	
@@ -474,7 +518,26 @@ Content-Length: 1711
 					 <section id="AppPackage">						 	
 						<ul>
 						<li>4. 创建Package</li>	
-						</ul>						
+						</ul>	
+							<code><pre>
+POST /autocad.io/v1/AppPackages HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer my_token
+Host: autocad.io
+Content-Length: 1173
+
+{
+  "odata.metadata":"https://developer.api.autodesk.com/autocad.io/v1/$metadata#AppPackages/@Element",
+  "Resource":"https://acesdev-s3-bucket.s3-us-west-1.amazonaws.com/aces-apppackages/ClientConsole-Dev/df154e6a-f186-43de-8dc8-72568b09130a?
+  AWSAccessKeyId=ASIAIETSOR6GIJ4CLBZA&Expires=1399932683&x-amz-security-token=AQoDYXdzEB0a0ANWsOk6XfvO0dCn8YbU4Chcm%2BMS7WQPqZTYeDe4F9L
+  %2Fap4ZH6Imrh%2BYvcAcBW0ztoM0IifyqfGzalnh379FWHaJCoKsIiN6V0teFotGF0Ggf4zB1VziUaN7HNhHmNCNJUmPOK4dUPxD3gSIYoY06vO3Xc6zLVMz5h3VfFXhgNow
+  wd8FHaWsHkcSx3SmQzl3mvClIi%2BWsWQoZjmrzZ8KfJW2%2FVnLirEMvnoSz2%2ByKJ2Kc2h0g5zytZOSOjvhH1siwwtquWF5G09CKjezjWKO4Do7AiCVv4GaYoKOPW0
+  6fbwvddSR2eEN4kiACqFrc0h4%2FRk%2Bh%2Ff3Lv1%2F45cbm0mVI25B745SZtSQd7zfx6zJ4kqt14o%2FZN7V06pAXkZgsH%2F5D9neWN%2Bg2hIbRPOhhP5S25YXc3qXfZsH
+  kwvVEs2OmEGchxLIwqeD9Y2lGFGSVxZ7wOOSKNXSy3lZapSYHNyjFZ2imTMJ7PtXlWtFG8qZXrRyXLKawZ3wk2vL3DLDfze5Q7t2VcnkbvRbYkCFWizubGZlz4kAGRki020AMKp8
+  DeT3tyks6uODdu3zI1tal1cK9i9EWus420sdu9rfAeyIIlSwn80faOB%2BahEKsAMiVndbNCCX1MSbBQ%3D%3D&Signature=Zx8SNnzukGYpImsrL105uUHrpc8%3D",
+  "RequiredEngineVersion":"20.0","Version":1,"Timestamp":"2014-05-05T23:06:31Z","UserId":"","Id":"SampleApp"
+}
+						</pre></code>
 					</section> 
 					
 					 			
@@ -482,6 +545,16 @@ Content-Length: 1711
 						<ul>
 					    <li>5. 创建Activity和Package关联</li>	
 						</ul>
+							<code><pre>
+POST autocad.io/v1/AppPackages(Id='Package1',UserId='ClientConsole-Dev')/$links/AppPackages HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer my_token
+
+{
+   "url" : "https://developer.api.autodesk.com/autocad.io/v1/AppPackages(Id='MyAppPackage',UserId='ClientConsole-Dev')"
+}
+						</pre></code>
+						
 					</section> 
 					
 					 <section id="AppPackage">						 	
